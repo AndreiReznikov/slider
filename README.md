@@ -1,127 +1,101 @@
-# Metalamp slider
+# PooshkaSlider
 
-# Description
+# Описание
 
-This is a jQuery plugin that implements the functionality of the numeric values slider.
+Это плагин для jQuery, реализующий функциональность слайдера числовых значений.
 
-When creating the slider, the MVP architecture was used, which contains three main modules - Model, View and Presenter.
+При создании слайдера использовалась архитектура MVP, которая содержит три основных модуля - Model, View и Presenter.
 
-- Model - a module that stores data and processes it
-- View - contains DOM tree elements and their display methods
-- Presenter - connects Model and View, and also contains the logic of the configuration panel
+- Модель - модуль, который хранит данные и обрабатывает их
+- View - содержит элементы дерева DOM и методы их отображения
+- Presenter - соединяет Model и View, а также содержит логику панели настройки
 
-When the user interacts with the interface (View), the Model methods are called, using Observer. After that, the Model, using Observer, notifies observers about a change in its state. The observers in this case are the View methods that accept the modified state of the model.
+Когда пользователь взаимодействует с интерфейсом (представлением), вызываются методы модели, используя Observer. После этого Модель, используя Observer, уведомляет наблюдателей об изменении своего состояния. Наблюдателями в данном случае являются методы представления, которые принимают измененное состояние модели.
 
-All DOM elements are subscribed to events in the Presenter class. Observers are also designated in this class.
+Все элементы DOM подписаны на события в классе Presenter. В этом классе также назначаются наблюдатели.
 
 ![UML](/uml/uml-pooshka-slider.png "UML")
 
-# Demo https://andreireznikov.github.io/metalamp-slider-demo/
+# Демо 
 
-# Technologies
+Для демонстрации возможностей слайдера добавлена демо-страница.
 
-The project is compatible with *jQuery 3.6.0* and *node 18.16.1*
+На странице представлено несколько слайдеров с различными начальными настройками. Для изменения настроек "на лету" к каждому слайдеру подключена конфигурационная панель (не является частью плагина).
 
-# Usage
+[Ссылка на демо]([https://github.com](https://andreireznikov.github.io/metalamp-slider-demo/))
 
-Add the following libraries to the page:
+# Технологии
+
+Проект совместим *jQuery 3.6.0* и *node 18.16.1*
+
+# Использование
+
+Добавьте следующие библиотеки в свой проект:
 
 - jQuery 3.6.0
 - pooshkaSlider.min.js
 
-Add the following stylesheets to the page:
+Подключите стили:
 
 - main.css
 
-# Working with the project
+# Работа с проектом
 
-First you have to create a copy of the remote repository locally:
+Создайте локальную копию репозитория:
 
 `git clone https://github.com/AndreiReznikov/metalamp-slider`
 
-Then you have to install all the necessary packages to work with the project. Use the following command in the local repository:
+Установите необходимые библиотеки для работы с проектом:
 
 `npm install`
 
-# Npm commands
+# Комманды NPM
 
-- "build:prod": build a production bundle
-```
-npm run build:prod
-```
-- "build:dev": build a development bundle
-```
-npm run build:dev
-```
-- "build:demo": build a demo bundle
+- "build:demo": сборка демо
 ```
 npm run build:demo
 ```
-- "server": start the local server
-```
-npm run server
-```
-- "test": run jest tests
-```
-npm run test
-```
-- "lint": check the project for linter errors
-```
-npm run lint
-```
-- "fix": fix linter errors
-```
-npm run fix
-```
-- "stylelint": check the project for stylelint errors,
-```
-npm run stylelint
-```
-- "fix:stylelint": fix stylelint errors
-```
-npm run fix:stylelint
-```
 
-# Initialization
+# Инициализация
 
-First you have to create a container for the slider and set its length and height:
+Сначала вам нужно создать контейнер для слайдера и задать его длину и высоту:
 
 `<div class="slider-container"></div>`
 
-The container can have any class name.
+Контейнер может иметь любое имя класса.
 
-The slider is created based on the div element. It needs to be placed in a container.
+Слайдер создается на основе элемента div. Его необходимо поместить в контейнер.
 
 `<div class="slider js-slider"></div>`
 
-To initialize the slider, call pooshkaSlider on the element:
+Чтобы инициализировать ползунок, вызовите pooshkaSlider для элемента:
 
 `$('.js-slider').pooshkaSlider();`
 
-You can also initialize the slider by adding a class to your element *pooshka-range-slider*:
+Вы также можете инициализировать ползунок, добавив класс *pooshka-range-slider* к своему элементу:
 
 `<div class="pooshka-range-slider"></div>`
 
-You can initialize the slider with the following parameters:
+Доступны следующие опции:
 
-| Option | Type | Defaults | Description | Data-attribute |
+| Опция | Тип | По-умолчания | Описание | Дата-атрибут |
 | --- | --- | --- | --- | --- |
-| double | boolean | false | double or single slider | data-double |
-| vertical | boolean | false | vertical or horizontal | data-vertical |
-| showTooltip | boolean | true | whether to show tooltips over handles | data-show-tooltip |
-| showLimit | boolean | true | whether to show the minimum and maximum values | data-show-limit |
-| showRange | boolean | true | whether to show the progress bar | data-show-range |
-| showScale | boolean | false | whether to show the scale | data-show-scale |
-| localeString | boolean | false | use localString | data-locale-string |
-| min | number | 0 | minimum value | data-min |
-| max | number | 100 | maximum value | data-max |
-| from | number | 10 | the value of the first handle | data-from |
-| to | number | 50 | the value of the second handle | data-to |
-| step | number | 0 | step value | data-step |
-| scaleNumber | number | 5 | number of values on the scale | data-scale-number |
-| onChange | function | - | callback called when the slider state changes | data-on-change |
+| double | boolean | false | один или два ползунка | data-double |
+| vertical | boolean | false | вертикальный или горизонтальный вид | data-vertical |
+| showTooltip | boolean | true | показать тултипы | data-show-tooltip |
+| showLimit | boolean | true | показать минимальное и максимальное значение | data-show-limit |
+| showRange | boolean | true | показать прогресс-бар | data-show-range |
+| showScale | boolean | false | показать шкалу значений | data-show-scale |
+| localeString | boolean | false | использовать для значений localString | data-locale-string |
+| min | number | 0 | минимальное значение | data-min |
+| max | number | 100 | максимальное значение | data-max |
+| from | number | 10 | значение первого ползунка | data-from |
+| to | number | 50 | значение второго ползунка | data-to |
+| step | number | 1 | значение шага | data-step |
+| scaleNumber | number | 5 | количество значений шкалы | data-scale-number |
+| onChange | function | - | вызывается при изменении состояния слайдера | data-on-change |
 
-Parameters are passed as an object as an argument:
+Опции передаются в виде объекта:
 
 `$('.js-slider').pooshkaSlider({
   double: true,
@@ -129,13 +103,13 @@ Parameters are passed as an object as an argument:
   step: 5,
 });`
 
-Parameters can also be passed through the data attributes of the element:
+Опции также могут быть переданы черех data-атрибуты:
 
 `<div class="slider js-slider" data-min="0" data-max="100" data-vertical="true"></div>`
 
-# Public methods
+# Публичные методы
 
-To use public methods, at first you must save slider instance to variable:
+Чтобы использовать Публичные методы, сначала вы должны сохранить экземпляр слайдера в переменной:
 
 `$('.js-slider').pooshkaSlider({
    double: true
@@ -145,7 +119,7 @@ To use public methods, at first you must save slider instance to variable:
 
  `$slider.update();`
 
- - update - overrides the set parameters
+ - update - перезаписывает установленные опции
 
     `$slider.update({
       double: false
@@ -153,27 +127,27 @@ To use public methods, at first you must save slider instance to variable:
 
 # Callback
 
-To subscribe to slider changes, use the onChange parameter:
+Чтобы подписаться на изменения слайдера, используйте опцию onChange:
 
 `$('.js-slider').pooshkaSlider({
    onChange: () => console.log('change')
  });`
 
- You can use the following arguments using destructurization:
+ Вы можете использовать следующие аргументы, используя деструктуризацию:
 
- - event - to get an event inside a function
+ - event - получить событие внутри функции
 
  `$('.js-slider').pooshkaSlider({
    onChange: ({ event }) => console.log(event)
  });`
 
- - options - to get slider options inside the function
+ - options - получить опции внутри функции
 
  `$('.js-slider').pooshkaSlider({
    onChange: ({ options }) => console.log(options.modelOptions.from)
  });`
 
- To unsubscribe from slider changes, pass a function that returns false using the public update method:
+ Чтобы отказаться от подписки на изменения слайдера, передайте функцию, которая возвращает значение false, используя метод обновления:
 
  `$slider.update({
    onChange: () => false
@@ -181,34 +155,34 @@ To subscribe to slider changes, use the onChange parameter:
 
 # Api
 
-To api methods, at first you must save slider instance to variable:
+Что касается методов api, то сначала вы должны сохранить экземпляр слайдера в переменной:
 
 `$('.js-slider').pooshkaSlider();`
 
  `const $slider = $('.js-slider').data('pooshkaSlider');`
 
- Then use an object with api methods:
+ Затем используйте объект с методами API:
 
 `$slider.data('api');`
 
-You can access the slider's jQuery elements via Api: and $document: $document, $stripe, $runnerFrom, $runnerTo, $limitMin, $limitMax, $scaleContainer.
+Вы можете получить доступ к jQuery элементам слайдера: $document, $stripe, $runnerFrom, $runnerTo, $limitMin, $limitMax, $scaleContainer
 
-You can use the following Api methods:
+Вы можете использовать следующие методы API:
 
-| Method | Description | Example |
+| Метод | Описание | Пример |
 | --- | --- | --- |
-| getModelOptions | Returns the current values: double, vertical, showTooltip, showLimit, showRange, show Scale, localeString,  positionParameter, lengthParameter, to, from, step, stepLength, min, max, scalePositionParameter, scaleNumber, scaleElements, numberOfCharactersAfterDot | $slider.data('api').getModelOptions().double |
-| updateUserConfig | Update model values | $slider.data('api').updateUserConfig({'vertical': true}) |
-| toggleDouble | Toggle double value | $slider.data('api').toggleDouble() |
-| toggleTooltip | Toggle showTooltip value | $slider.data('api').toggleTooltip() |
-| toggleRange | Toggle showRange value | $slider.data('api').toggleRange() |
-| toggleScale | Toggle showScale value | $slider.data('api').toggleScale() |
-| toggleVertical | Toggle vertical value | $slider.data('api').toggleVertical() |
-| setFrom | Set from value | $slider.data('api').setFrom(25) |
-| setTo | Set to value | $slider.data('api').setTo(50) |
-| setMin | Set min value | $slider.data('api').setMin(5) |
-| setMax | Set max value | $slider.data('api').setMax(100) |
-| setStep | Set step value | $slider.data('api').setStep(5) |
+| getModelOptions | возвращает текущие значения: double, vertical, showTooltip, showLimit, showRange, show Scale, localeString,  positionParameter, lengthParameter, to, from, step, stepLength, min, max, scalePositionParameter, scaleNumber, scaleElements, numberOfCharactersAfterDot | $slider.data('api').getModelOptions().double |
+| updateUserConfig | обновить значения модели | $slider.data('api').updateUserConfig({'vertical': true}) |
+| toggleDouble | переключает | $slider.data('api').toggleDouble() |
+| toggleTooltip | переключает showTooltip | $slider.data('api').toggleTooltip() |
+| toggleRange | переключает showRange | $slider.data('api').toggleRange() |
+| toggleScale | переключает showScale | $slider.data('api').toggleScale() |
+| toggleVertical | переключает vertical | $slider.data('api').toggleVertical() |
+| setFrom | задаёт значение from | $slider.data('api').setFrom(25) |
+| setTo | задаёт значение to | $slider.data('api').setTo(50) |
+| setMin | задаёт значение min | $slider.data('api').setMin(5) |
+| setMax | задаёт значение max | $slider.data('api').setMax(100) |
+| setStep | задаёт значение step | $slider.data('api').setStep(5) |
 
 
 
